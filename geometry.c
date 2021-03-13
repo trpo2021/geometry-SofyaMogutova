@@ -9,7 +9,6 @@ int main()
 {
     char figure[7];
     double x, y, rad;
-    char geometry;
     char cir[] = "circle";
     printf("Введите фигуру в формате WKT:");
     scanf("%s", figure);
@@ -22,7 +21,7 @@ int main()
         printf("Error at column 7: expected '<double>'\n");
     }
     if (rad <= 0) {
-        printf("Error: data entered incorrectly");
+        printf("Error: data entered incorrectly\n");
     }
     return 0;
 }
