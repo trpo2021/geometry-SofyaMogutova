@@ -1,8 +1,7 @@
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <math.h>
 #include <string.h>
-
 //Формат записи: <figure> (x y, radius)
 
 int main()

@@ -1,13 +1,14 @@
 CFLAGS = -Wall -Wextra -Werror
 CPPFLAGS = -MMD
-all:geometry
-geometry: main.o out.o
+CC = gcc
+all: geometry
+out: geometry.o out.o
 	$(CC) $(CFLAGS) -o $@ $^
 
-main.o: main.c
+geometry.o: geometry.c
 	$(CC) -c $(CFLAGS) -o $@ $<
 
-out.o: out.c
+out.o: out.c out.h
 	$(CC) -c $(CFLAGS) -o $@ $<
 
--include out.d
+-include geometry.d out.d
