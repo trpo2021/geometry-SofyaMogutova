@@ -10,6 +10,6 @@ void circle(double rad)
 	perimetr=2*pi*rad;
 	area=pi*rad*rad;
 	printf("P=%.2lf\n",perimetr);
-	printf("S=%.2lf",area);
+	printf("S=%.2lf\n",area);
 }
 
