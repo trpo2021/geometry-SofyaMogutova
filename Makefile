@@ -1,14 +1,17 @@
-CFLAGS = -Wall -Wextra -Werror
-CPPFLAGS = -MMD
 CC = gcc
+CFLAGS = -lm -Wall -Wextra -Werror
+CPPFLAGS = -I .src -MP -MMD
+HEADER = .src/libgeometry/out.h
 all: geometry
-out: geometry.o out.o
+geometry: .src/geometry/geometry.o .src/libgeometry/out.o
 	$(CC) $(CFLAGS) -o $@ $^
 
-geometry.o: geometry.c
-	$(CC) -c $(CFLAGS) -o $@ $<
+geometry.o: .src/geometry/geometry.c $(HEADER)
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
 
-out.o: out.c out.h
-	$(CC) -c $(CFLAGS) -o $@ $<
+out.o: .src/libgeometry/out.c .src/libgeometry/out.h
+	$(CC) -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
 
--include geometry.d out.d
+.PHONY: clean
+clean:
+	rm -rf *.o geometry
