@@ -1,8 +1,8 @@
+#include "libgeometry/out.h"
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <string.h>
-#include "libgeometry/out.h"
 int main()
 {
     char figure[7];
@@ -14,9 +14,12 @@ int main()
     if (strncmp(cir, figure, 6) == 0) {
         if ((x != (int)x) || (y != (int)y) || (rad != (int)rad)) {
             if (rad > 0) {
-               circle (rad);
-            } else printf("Error: data entered incorrectly\n");
-        } else printf("Error at column 7: expected '<double>'\n");
-    } else printf("Error at column 0: expected 'circle'\n");
+                circle(rad);
+            } else
+                printf("Error: data entered incorrectly\n");
+        } else
+            printf("Error at column 7: expected '<double>'\n");
+    } else
+        printf("Error at column 0: expected 'circle'\n");
     return 0;
 }
