@@ -5,9 +5,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-enum LengthsOfFigures { LENGTH_OF_CIRCLE = 6, LENGTH_OF_TRIANGLE = 8 };
+enum LengthsOfFigures { LENGTH_OF_CIRCLE = 6,
+    LENGTH_OF_TRIANGLE = 8 };
 
-typedef enum CollisionStatus { INTERSECT = 0, DONTINTERSECT = -1 } CollStatus;
+typedef enum CollisionStatus { INTERSECT = 0,
+    DONTINTERSECT = -1 } CollStatus;
 
 static float calculate_length(float x2, float x1, float y2, float y1)
 {
@@ -19,10 +21,10 @@ static void calculate_length_of_sides(Shape shape, float* side)
     int b = 0;
     for (int i = 0; i < 3; i++) {
         side[i] = calculate_length(
-                shape.data.triangle.x[b + 1],
-                shape.data.triangle.x[b],
-                shape.data.triangle.y[b + 1],
-                shape.data.triangle.y[b]);
+            shape.data.triangle.x[b + 1],
+            shape.data.triangle.x[b],
+            shape.data.triangle.y[b + 1],
+            shape.data.triangle.y[b]);
         b += 1;
     }
 }
@@ -54,10 +56,10 @@ static CollStatus check_intersect_c(Shape shape1, Shape shape2)
 {
     float sum_radius = shape1.data.circle.radius1 + shape2.data.circle.radius1;
     float d = calculate_length(
-            shape2.data.circle.x1,
-            shape1.data.circle.x1,
-            shape2.data.circle.y1,
-            shape1.data.circle.y1);
+        shape2.data.circle.x1,
+        shape1.data.circle.x1,
+        shape2.data.circle.y1,
+        shape1.data.circle.y1);
     if (d <= sum_radius) {
         return INTERSECT;
     }
@@ -71,14 +73,14 @@ static float find_vector_product(float ax, float ay, float bx, float by)
 }
 
 static CollStatus find_lines_cross(
-        float x1,
-        float y1,
-        float x2,
-        float y2,
-        float x3,
-        float y3,
-        float x4,
-        float y4)
+    float x1,
+    float y1,
+    float x2,
+    float y2,
+    float x3,
+    float y3,
+    float x4,
+    float y4)
 { // Пересекаются ли отрезки?
     float v[4];
     v[0] = find_vector_product(x4 - x3, y4 - y3, x1 - x3, y1 - y3);
@@ -88,20 +90,21 @@ static CollStatus find_lines_cross(
     if ((v[0] * v[1] <= 0)
         && (v[2] * v[3] <= 0)) { // {v1v2<0 и v3v4<0, отрезки пересекаются}
         return INTERSECT;
-    } else {
+    }
+    else {
         return DONTINTERSECT;
     }
 }
 
 static CollStatus find_shape_inside(
-        float x1,
-        float y1,
-        float x2,
-        float y2,
-        float x3,
-        float y3,
-        float x0,
-        float y0)
+    float x1,
+    float y1,
+    float x2,
+    float y2,
+    float x3,
+    float y3,
+    float x0,
+    float y0)
 {
     float v1, v2, v3;
     v1 = find_vector_product((x1 - x0), (y1 - y0), (x2 - x1), (y2 - y1));
@@ -117,18 +120,18 @@ static CollStatus find_shape_inside(
 // FIX MEEEEEE пересечение треугольников
 static CollStatus check_intersect_t(Shape shape1, Shape shape2)
 {
-    CollStatus status[2] = {DONTINTERSECT, DONTINTERSECT};
+    CollStatus status[2] = { DONTINTERSECT, DONTINTERSECT };
     for (int i = 0; i < 3; i++) {
         for (int k = 0; k < 2; k++) {
             status[k] = find_lines_cross(
-                    shape1.data.triangle.x[i],
-                    shape1.data.triangle.y[i],
-                    shape1.data.triangle.x[i + 1],
-                    shape1.data.triangle.y[i + 1],
-                    shape2.data.triangle.x[k],
-                    shape2.data.triangle.y[k],
-                    shape2.data.triangle.x[k + 1],
-                    shape2.data.triangle.y[k + 1]);
+                shape1.data.triangle.x[i],
+                shape1.data.triangle.y[i],
+                shape1.data.triangle.x[i + 1],
+                shape1.data.triangle.y[i + 1],
+                shape2.data.triangle.x[k],
+                shape2.data.triangle.y[k],
+                shape2.data.triangle.x[k + 1],
+                shape2.data.triangle.y[k + 1]);
         }
         if (status[0] == INTERSECT || status[1] == INTERSECT) {
             return INTERSECT;
@@ -142,14 +145,14 @@ static CollStatus check_intersect_t(Shape shape1, Shape shape2)
             choice2 = shape1;
         }
         status[k] = find_shape_inside(
-                choice1.data.triangle.x[0],
-                choice1.data.triangle.y[0],
-                choice1.data.triangle.x[1],
-                choice1.data.triangle.y[1],
-                choice1.data.triangle.x[2],
-                choice1.data.triangle.y[2],
-                choice2.data.triangle.x[0],
-                choice2.data.triangle.y[0]);
+            choice1.data.triangle.x[0],
+            choice1.data.triangle.y[0],
+            choice1.data.triangle.x[1],
+            choice1.data.triangle.y[1],
+            choice1.data.triangle.x[2],
+            choice1.data.triangle.y[2],
+            choice2.data.triangle.x[0],
+            choice2.data.triangle.y[0]);
     }
     if (status[0] == INTERSECT || status[1] == INTERSECT) {
         return INTERSECT;
@@ -163,7 +166,7 @@ find_distance(float x1, float x2, float y1, float y2, float x0, float y0)
     float side_length = calculate_length(x2, x1, y2, y1);
     Shape triangle;
 
-    float coords[8] = {x0, y0, x1, y1, x2, y2, x0, y0};
+    float coords[8] = { x0, y0, x1, y1, x2, y2, x0, y0 };
     int b = 0;
     for (int d = 0; d < 4; d++) {
         triangle.data.triangle.x[d] = coords[b];
@@ -181,22 +184,23 @@ static CollStatus check_intersect_c_t(Shape circle, Shape triangle)
     // проверить принадлежит ли ближайшая точка отрезку
     for (int i = 0; i < 3; i++) {
         float distance = find_distance(
-                triangle.data.triangle.x[i],
-                triangle.data.triangle.x[i + 1],
-                triangle.data.triangle.y[i],
-                triangle.data.triangle.y[i + 1],
-                circle.data.circle.x1,
-                circle.data.circle.y1);
+            triangle.data.triangle.x[i],
+            triangle.data.triangle.x[i + 1],
+            triangle.data.triangle.y[i],
+            triangle.data.triangle.y[i + 1],
+            circle.data.circle.x1,
+            circle.data.circle.y1);
         if (distance <= circle.data.circle.radius1) {
             float circle_start
-                    = circle.data.circle.x1 - circle.data.circle.radius1;
+                = circle.data.circle.x1 - circle.data.circle.radius1;
             float circle_end
-                    = circle.data.circle.x1 + circle.data.circle.radius1;
+                = circle.data.circle.x1 + circle.data.circle.radius1;
             float line_start, line_end;
             if (triangle.data.triangle.x[i] < triangle.data.triangle.x[i + 1]) {
                 line_start = triangle.data.triangle.x[i];
                 line_end = triangle.data.triangle.x[i + 1];
-            } else {
+            }
+            else {
                 line_start = triangle.data.triangle.x[i + 1];
                 line_end = triangle.data.triangle.x[i];
             }
@@ -207,14 +211,14 @@ static CollStatus check_intersect_c_t(Shape circle, Shape triangle)
     }
     // 3 центр окружности лежит внутри треугольника
     CollStatus status = find_shape_inside(
-            triangle.data.triangle.x[0],
-            triangle.data.triangle.y[0],
-            triangle.data.triangle.x[1],
-            triangle.data.triangle.y[1],
-            triangle.data.triangle.x[2],
-            triangle.data.triangle.y[2],
-            circle.data.circle.x1,
-            circle.data.circle.y1);
+        triangle.data.triangle.x[0],
+        triangle.data.triangle.y[0],
+        triangle.data.triangle.x[1],
+        triangle.data.triangle.y[1],
+        triangle.data.triangle.x[2],
+        triangle.data.triangle.y[2],
+        circle.data.circle.x1,
+        circle.data.circle.y1);
     if (status == INTERSECT) {
         return INTERSECT;
     }
@@ -222,9 +226,9 @@ static CollStatus check_intersect_c_t(Shape circle, Shape triangle)
 }
 
 void find_collisions(
-        Shape* shape,
-        int figure_counter,
-        int collision[figure_counter][figure_counter - 1])
+    Shape* shape,
+    int figure_counter,
+    int collision[figure_counter][figure_counter - 1])
 {
     int status;
 
@@ -238,25 +242,28 @@ void find_collisions(
                         collision[i][cols] = m;
                         cols++;
                     }
-                } else if (
-                        shape[i].figure == CIRCLE
-                        && shape[m].figure == TRIANGLE) {
+                }
+                else if (
+                    shape[i].figure == CIRCLE
+                    && shape[m].figure == TRIANGLE) {
                     status = check_intersect_c_t(shape[i], shape[m]);
                     if (status == INTERSECT) {
                         collision[i][cols] = m;
                         cols++;
                     }
-                } else if (
-                        shape[i].figure == TRIANGLE
-                        && shape[m].figure == CIRCLE) {
+                }
+                else if (
+                    shape[i].figure == TRIANGLE
+                    && shape[m].figure == CIRCLE) {
                     status = check_intersect_c_t(shape[m], shape[i]);
                     if (status == INTERSECT) {
                         collision[i][cols] = m;
                         cols++;
                     }
-                } else if (
-                        shape[i].figure == TRIANGLE
-                        && shape[m].figure == TRIANGLE) {
+                }
+                else if (
+                    shape[i].figure == TRIANGLE
+                    && shape[m].figure == TRIANGLE) {
                     status = check_intersect_t(shape[i], shape[m]);
                     if (status == INTERSECT) {
                         collision[i][cols] = m;
@@ -280,7 +287,8 @@ static ErrStatus check_punctuation_symbols(char** cursor_start, char symbol)
     if (**cursor_start == symbol) {
         (*cursor_start)++;
         return SUCCESS;
-    } else {
+    }
+    else {
         return FAILURE;
     }
 }
@@ -291,7 +299,8 @@ static ErrStatus check_extra_token(char** cursor_start)
         if ((isalnum(**cursor_start) != 0) || (ispunct(**cursor_start) != 0)) {
             **cursor_start = '\0';
             return FAILURE;
-        } else {
+        }
+        else {
             (*cursor_start)++;
         }
     }
@@ -314,18 +323,20 @@ static void select_type(char** cursor_start, char** cursor_end)
 вывести ошибку*/
 Type determine_figure(char** cursor_start, char** cursor_end)
 {
-    char type_circle[] = {"Circle"};
-    char type_triangle[] = {"Triangle"};
+    char type_circle[] = { "Circle" };
+    char type_triangle[] = { "Triangle" };
     select_type(cursor_start, cursor_end);
     size_t length_of_type = *cursor_end - *cursor_start;
     if (strncasecmp(*cursor_start, type_circle, LENGTH_OF_CIRCLE) == 0
         && length_of_type == LENGTH_OF_CIRCLE) {
         return CIRCLE;
-    } else if (
-            strncasecmp(*cursor_start, type_triangle, LENGTH_OF_TRIANGLE) == 0
-            && length_of_type == LENGTH_OF_TRIANGLE) {
+    }
+    else if (
+        strncasecmp(*cursor_start, type_triangle, LENGTH_OF_TRIANGLE) == 0
+        && length_of_type == LENGTH_OF_TRIANGLE) {
         return TRIANGLE;
-    } else {
+    }
+    else {
         return UNKNOWN;
     }
 }
@@ -341,10 +352,10 @@ static float circle_area(Shape shape)
 }
 
 ErrStatus parse_circle(
-        char** cursor_start,
-        char** cursor_end,
-        int* figure_counter,
-        Shape* shape)
+    char** cursor_start,
+    char** cursor_end,
+    int* figure_counter,
+    Shape* shape)
 {
     ErrStatus implementation2;
     float x1, y1, radius1;
@@ -387,19 +398,19 @@ ErrStatus parse_circle(
     shape[*figure_counter].data.circle.radius1 = radius1;
 
     shape[*figure_counter].data.circle.perimeter
-            = circle_perimeter(shape[*figure_counter]);
+        = circle_perimeter(shape[*figure_counter]);
     shape[*figure_counter].data.circle.area
-            = circle_area(shape[*figure_counter]);
+        = circle_area(shape[*figure_counter]);
     (*figure_counter)++;
 
     return SUCCESS;
 }
 
 ErrStatus parse_triangle(
-        char** cursor_start,
-        char** cursor_end,
-        int* figure_counter,
-        Shape* shape)
+    char** cursor_start,
+    char** cursor_end,
+    int* figure_counter,
+    Shape* shape)
 {
     ErrStatus implementation2;
     float coords[8];
@@ -481,9 +492,9 @@ ErrStatus parse_triangle(
     }
 
     shape[*figure_counter].data.triangle.perimeter
-            = triangle_perimeter(shape[*figure_counter]);
+        = triangle_perimeter(shape[*figure_counter]);
     shape[*figure_counter].data.triangle.area
-            = triangle_area(shape[*figure_counter]);
+        = triangle_area(shape[*figure_counter]);
     (*figure_counter)++;
 
     return SUCCESS;
