@@ -1,6 +1,8 @@
 #pragma once
 
-typedef enum TypesOfFigures { UNKNOWN, CIRCLE, TRIANGLE } Type;
+typedef enum TypesOfFigures { UNKNOWN,
+    CIRCLE,
+    TRIANGLE } Type;
 
 typedef enum ErrorStatus {
     SUCCESS = 0,
@@ -45,20 +47,20 @@ typedef struct {
 } Shape;
 
 void find_collisions(
-        Shape* shape,
-        int figure_counter,
-        int collision[figure_counter][figure_counter - 1]);
+    Shape* shape,
+    int figure_counter,
+    int collision[figure_counter][figure_counter - 1]);
 
 Type determine_figure(char** cursor_start, char** cursor_end);
 
 ErrStatus parse_circle(
-        char** cursor_start,
-        char** cursor_end,
-        int* figure_counter,
-        Shape* shape);
+    char** cursor_start,
+    char** cursor_end,
+    int* figure_counter,
+    Shape* shape);
 
 ErrStatus parse_triangle(
-        char** cursor_start,
-        char** cursor_end,
-        int* figure_counter,
-        Shape* shape);
+    char** cursor_start,
+    char** cursor_end,
+    int* figure_counter,
+    Shape* shape);
