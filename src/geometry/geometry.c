@@ -90,7 +90,6 @@ int main()
             break;
         }
     }
-
     // поиск коллизий
     int collision[figure_counter][figure_counter - 1];
     for (int r = 0; r < figure_counter; r++) {
@@ -107,7 +106,6 @@ int main()
         printf("\n");
     }
     printf("\n\n");
-
     // вывод данных, печать
     printf("\n\n");
     for (int i = 0; i < figure_counter; i++) {
@@ -131,7 +129,6 @@ int main()
             printf("\narea = %.1lf", shape[i].data.triangle.area);
         }
         printf("\nIntersects with:\n");
-
         //пересечение
         for (int d = 0; d < (figure_counter - 1); d++) {
             if (collision[i][d] != EMPTY) {
