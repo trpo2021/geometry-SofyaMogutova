@@ -4,7 +4,6 @@ on: push
 
 jobs:
   build:
-    runs-on: ubuntu-latest
 	runs-on: ubuntu-20.04
 
     steps:
@@ -16,8 +15,8 @@ jobs:
 	  - name: Build test 
         run: make test
 
-      - name: Run test
-        run: bin/test
+      - name: Test
+        run: make test && bin/test.c
 
       - name: Build application
         run: make
