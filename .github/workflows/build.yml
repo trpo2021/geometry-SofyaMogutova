@@ -9,8 +9,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Check codestyle
-
       - name: Test
         run: make test && ./bin/test
 
