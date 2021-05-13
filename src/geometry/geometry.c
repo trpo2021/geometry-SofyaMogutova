@@ -32,11 +32,11 @@ int main()
         switch (figure) {
         case CIRCLE:
             status = parse_circle(
-                &cursor_start, &cursor_end, &figure_counter, shape);
+                	&cursor_start, &cursor_end, &figure_counter, shape);
             break;
         case TRIANGLE:
             status = parse_triangle(
-                &cursor_start, &cursor_end, &figure_counter, shape);
+                	&cursor_start, &cursor_end, &figure_counter, shape);
             break;
         case UNKNOWN:
             printf("Error: expected \"Circle\" | \"Triangle\"\n\n");
@@ -111,19 +111,18 @@ int main()
     for (int i = 0; i < figure_counter; i++) {
         if (shape[i].figure == CIRCLE) {
             printf("%d. circle ( %.1lf %.1lf, %.1lf )",
-                i + 1,
-                shape[i].data.circle.x1,
-                shape[i].data.circle.y1,
-                shape[i].data.circle.radius1);
+		            i + 1,
+		            shape[i].data.circle.x1,
+		            shape[i].data.circle.y1,
+		            shape[i].data.circle.radius1);
             printf("\nperimeter = %.1lf", shape[i].data.circle.perimeter);
             printf("\narea = %.1lf", shape[i].data.circle.area);
-        }
-        else if (shape[i].figure == TRIANGLE) {
+        } else if (shape[i].figure == TRIANGLE) {
             printf("%d triangle (( ", i + 1);
             for (int m = 0; m < 4; m++) {
                 printf("%.1lf %.1lf, ",
-                    shape[i].data.triangle.x[m],
-                    shape[i].data.triangle.y[m]);
+		                shape[i].data.triangle.x[m],
+		                shape[i].data.triangle.y[m]);
             }
             printf("))");
             printf("\nperimeter = %.1lf", shape[i].data.triangle.perimeter);

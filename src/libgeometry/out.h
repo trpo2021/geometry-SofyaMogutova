@@ -45,9 +45,9 @@ typedef struct {
 } Shape;
 
 void find_collisions(
-    Shape* shape,
-    int figure_counter,
-    int collision[figure_counter][figure_counter - 1]);
+		Shape* shape,
+		int figure_counter,
+		int collision[figure_counter][figure_counter - 1]);
 
 Type check_figure(char** cursor_start, char** cursor_end);
 
@@ -56,13 +56,13 @@ float circle_perimeter(Shape shape);
 float circle_area(Shape shape);
 
 ErrStatus parse_circle(
-    char** cursor_start,
-    char** cursor_end,
-    int* figure_counter,
-    Shape* shape);
+		char** cursor_start,
+		char** cursor_end,
+		int* figure_counter,
+		Shape* shape);
 
 ErrStatus parse_triangle(
-    char** cursor_start,
-    char** cursor_end,
-    int* figure_counter,
-    Shape* shape);
+		char** cursor_start,
+		char** cursor_end,
+		int* figure_counter,
+		Shape* shape);

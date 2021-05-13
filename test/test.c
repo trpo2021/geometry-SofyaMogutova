@@ -40,7 +40,8 @@ CTEST(splitting, circle3)
     char figure[] = "(0 0 1.5)";
     char* s = figure;
     char* e = figure;
-    int figure_counter = 0, real = parse_circle(&s, &e, &figure_counter, circle), exp = COMMA;
+    int figure_counter = 0,
+        real = parse_circle(&s, &e, &figure_counter, circle), exp = COMMA;
     ASSERT_EQUAL(exp, real);
 }
 CTEST(splitting, triangle3)
@@ -49,7 +50,8 @@ CTEST(splitting, triangle3)
     char figure[] = "((3 2 6 5 -1 3 5 7))";
     char* s = figure;
     char* e = figure;
-    int figure_counter = 0, real = parse_triangle(&s, &e, &figure_counter, triangle), exp = COMMA;
+    int figure_counter = 0,
+        real = parse_triangle(&s, &e, &figure_counter, triangle), exp = COMMA;
     ASSERT_EQUAL(exp, real);
 }
 CTEST(area, circle4)
