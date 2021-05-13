@@ -1,6 +1,6 @@
 #include <ctest.h>
-#include <math.h>
 #include <libgeometry/out.h>
+#include <math.h>
 
 CTEST(check_figure, circle)
 {

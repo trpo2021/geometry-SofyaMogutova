@@ -1,8 +1,6 @@
 #pragma once
 
-typedef enum TypesOfFigures { UNKNOWN,
-    CIRCLE,
-    TRIANGLE } Type;
+typedef enum TypesOfFigures { UNKNOWN, CIRCLE, TRIANGLE } Type;
 
 typedef enum ErrorStatus {
     SUCCESS = 0,
