@@ -1,0 +1,7 @@
+*.o
+*.exe
+*.d
+*.a
+*bin/geometry
+*bin/test
+*.c~
